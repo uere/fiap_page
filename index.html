@@ -100,6 +100,7 @@
 <script type="text/javascript">
 // Definir a função postMSG(), conferir Canal e Webhook:
   function postMSG(){
+    M.toast({html: 'Enviando a mensagem usando Ajax / jQuery!', classes: 'rounded'});
     var webhook = document.getElementById('webhook').value
     var msg = document.getElementById('msgInput').value
     var chan = document.getElementById('canal').value
