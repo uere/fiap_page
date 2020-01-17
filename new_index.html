@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=windows-1252">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.2.js"></script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $('.parallax').parallax();
+    		$('.fixed-action-btn').floatingActionButton();  
+        $('.modal').modal();
+        $('.tap-target').tapTarget();
+      });
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+    }
+      
+    .bgimg-1, .bgimg-2, .bgimg-3 {
+      position: relative;
+      opacity: 0.65;
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+    }
+    .bgimg-1 {
+      background-image: url("https://images.unsplash.com/photo-1529236183275-4fdcf2bc987e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1947&q=80");
+      min-height: 100%;
+    }
+
+    .bgimg-2 {
+      background-image: url("https://images.unsplash.com/photo-1496037236076-2fbad1c7ac1c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80");
+      min-height: 400px;
+    }
+
+    .bgimg-3 {
+      background-image: url("https://images.unsplash.com/photo-1513755638256-fbef33c0ca1f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80");
+      min-height: 400px;
+    }
+
+    /* Turn off parallax scrolling for tablets and phones */
+    @media only screen and (max-device-width: 1024px) {
+      .bgimg-1, .bgimg-2, .bgimg-3 {
+        background-attachment: scroll;
+      }
+    }  
+    </style>
+    <script type="text/javascript">
+    // Definir postMSG(), conferir Canal e Webhook:
+      function postMSG(){
+        M.toast({html: 'Enviando a mensagem usando Ajax / jQuery!', classes: 'rounded'});
+        var webhook = document.getElementById('webhook').value
+        var msg = document.getElementById('msgInput').value
+        var chan = document.getElementById('canal').value
+        var user = document.getElementById('user').value
+        var icone = document.getElementById('icone').value
+        // format payload for slack
+        var payload = {
+          "channel":chan,
+          "username": user,
+          "text": msg,
+          "icon_emoji": icone,
+        };
+        var sdata = JSON.stringify(payload)
+        // log in console
+        console.log(sdata)
+        // post
+         $.ajax({
+           url: webhook,
+           type: 'POST',
+           processData: true,
+           data : sdata ,
+           success : function(data) {
+             // success will show on page
+             console.log(data)
+             $('#result').html(data);
+           },
+           error: function(data){
+             // error will show error object
+             console.log(data)
+             $('#result').html("error:"+JSON.stringify(data));
+          }
+         });
+      }
+    </script>
+    <title>Frontend Web Server</title>
+  </head>
+  <body>
+    <div class="bgimg-1">
+      <div class="container">
+        <div class="col s2">&nbsp;</div>
+        <div class="col s12">
+          <div class="card blue darken-4">
+            <div class="card-content white-text">
+              <div class="card-title">NOME ALUNO <br>
+                Envio de mensagem Slack</div>
+            </div>
+            <div class="card-content white">
+              <table class="bordered">
+                <form id="slackform"></form>
+                <tbody>
+                  <tr>
+                    <td>URL Webhook</td>
+                    <td>
+                      <div class="input-field col s12"> <textarea id="webhook"
+class="materialize-textarea">https://hooks.slack.com/services/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</textarea>
+                        <label for="webhook">Digite o Webhook</label> </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Canal</td>
+                    <td>
+                      <div class="input-field col s12"> <textarea id="canal" class="materialize-textarea">#lab-testes</textarea>
+                        <label for="canal">#Canal</label> </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Mensagem</td>
+                    <td>
+                      <div class="input-field col s12"> <textarea id="msgInput"
+class="materialize-textarea"></textarea>
+                        <label for="msgInput">Digite uma mensagem</label> </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Usuario</td>
+                    <td>
+                      <div class="input-field col s12"> <textarea id="user" class="materialize-textarea">NOME ALUNO_app</textarea>
+                        <label for="user">Digite seu nome</label> </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Icone <a href="https://www.webfx.com/tools/emoji-cheat-sheet/"
+                        target="_blank">(escolher)</a></td>
+                    <td>
+                      <div class="input-field col s12"> <textarea id="icone" class="materialize-textarea">:cloud:</textarea>
+                        <label for="icone">Escolha seu icone</label> </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Clicar</td>
+                    <td>
+                      <!-- <center><input value="enviar" onclick="postMSG()" type="button"></center> -->
+                      <a class="waves-effect waves-light btn" onclick="postMSG()">enviar</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card blue darken-4">
+            <div class="card-content white-text">
+              <div class="card-title">Resultado: </div>
+            </div>
+            <div class="card-content white">
+              <div id="result"></div>
+              <table class="bordered">
+                
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col s2">&nbsp;</div>
+      </div>
+      <div class="fixed-action-btn">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">        
+        <a class="btn-floating btn-large blue">
+          <i class="large material-icons">menu</i>        
+        </a>
+        <ul>          
+          <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+          <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>          
+          <li><a id="menu" class="btn-floating green"><i class="material-icons">publish</i></a></li>
+          <li><a class="btn-floating grey btn modal-trigger" href="#modal1"><i class="material-icons">attach_file</i></a></li>
+          <li><a class="btn-floating purple" onclick="M.toast({html: 'Clicou em Apps!', classes: 'rounded'});">apps</a></li>
+        </ul>      
+      </div>
+  <!-- Element Showed  TODO - NON VAI -->
+  <a id="menu" class="waves-effect waves-light btn btn-floating" ><i class="material-icons">menu</i></a>
+
+        <!-- Modal Structure -->
+        <div id="modal1" class="modal">
+          <div class="modal-content">
+            <h4>Modal Header</h4>
+            <p>A bunch of text</p>
+          </div>
+          <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">OK</a>
+          </div>
+        </div>      
+        <!-- Tap Target Structure -->
+        <div class="tap-target" data-target="menu">
+          <div class="tap-target-content">
+            <h5>Title</h5>
+            <p>A bunch of text</p>
+          </div>
+        </div>
+      
+    </div>
+  </body>
+</html>
