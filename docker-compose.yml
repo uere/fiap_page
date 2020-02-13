@@ -1,0 +1,6 @@
+version: '3'
+services:
+  slackpage:
+    build: .
+    ports:
+     - "8020:80"
