@@ -66,7 +66,7 @@ class="materialize-textarea">https://f3hsbw8zig.execute-api.us-east-1.amazonaws.
       </div>
     </div>
     <script type="text/javascript">
-/* Definir a função postMSG(), conferir Canal e Webhook:
+// Definir a função postMSG(), conferir Canal e Webhook:
   function postMSG(){
     M.toast({html: 'Enviando a mensagem usando Ajax / jQuery!', classes: 'rounded'});
     var webhook = document.getElementById('webhook').value
@@ -97,8 +97,8 @@ class="materialize-textarea">https://f3hsbw8zig.execute-api.us-east-1.amazonaws.
          $('#result').html("error:"+JSON.stringify(data));
       }
      });
-  }*/
-  var createCORSRequest = function(method, url) {
+  }
+  /*var createCORSRequest = function(method, url) {
     var xhr = new XMLHttpRequest();
     if ("withCredentials" in xhr) {
       // Most browsers.
@@ -126,7 +126,7 @@ class="materialize-textarea">https://f3hsbw8zig.execute-api.us-east-1.amazonaws.
     console.log("Error code goes here.")
   };
 
-  xhr.send();
+  xhr.send();*/
 </script>
   </body>
 </html>
