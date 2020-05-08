@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.5.2.js"></script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <title>Frontend Web Server</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col s2">&nbsp;</div>
+        <div class="col s12">
+          <div class="card blue">
+            <div class="card-content white-text">
+              <div class="card-title">MEGAHACK <br>
+                Envio de URL para SCRAP</div>
+            </div>
+            <div class="card-content white">
+              <table class="bordered">
+                <form id="slackform"></form>
+                <tbody>
+                  <tr>
+                    <td>URL Webhook</td>
+                    <td>
+                      <div class="input-field col s12"> <textarea readonly="readonly"
+id="webhook"
+class="materialize-textarea">https://f3hsbw8zig.execute-api.us-east-1.amazonaws.com/prod</textarea>
+                        <label for="webhook"></label> </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>URL Mercado Livre a ser analisada</td>
+                    <td>
+                      <div class="input-field col s12"> <textarea id="url" class="materialize-textarea">https://produto.mercadolivre.com.br/MLB-902790449-batedeira-stand-mixer-candy-apple-ked33a3-_JM#reco_item_pos=1&amp;reco_backend=machinalis-seller-items-pdp&amp;reco_backend_type=low_level&amp;reco_client=vip-seller_items-above&amp;reco_id=f3c079e3-5dfd-418a-9479-8ec4fd57f651</textarea>
+                        <label for="canal">URL Mercado Livre</label> </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Clicar</td>
+                    <td>
+                      <!-- <center><input value="enviar" onclick="postMSG()" type="button"></center> -->
+                      <a class="waves-effect waves-light btn" onclick="postMSG()">enviar</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card blue">
+            <div class="card-content white-text">
+              <div class="card-title">Resultado: </div>
+            </div>
+            <div class="card-content white">
+              <div id="result"></div>
+              <table class="bordered">
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col s2">&nbsp;</div>
+      </div>
+    </div>
+    <script type="text/javascript">
+/* Definir a função postMSG(), conferir Canal e Webhook:
+  function postMSG(){
+    M.toast({html: 'Enviando a mensagem usando Ajax / jQuery!', classes: 'rounded'});
+    var webhook = document.getElementById('webhook').value
+    var url = document.getElementById('url').value
+    // format payload
+    var payload = {
+      "url":url,
+    };
+    var sdata = JSON.stringify(payload)
+    // log in console
+    console.log(sdata)
+    // post
+     $.ajax({
+       url: webhook,
+       contentType: 'application/json',
+       headers: {  'Access-Control-Allow-Origin': '*' },
+       type: 'POST',
+       processData: true,
+       data : sdata ,
+       success : function(data) {
+         // success will show on page
+         console.log(data)
+         $('#result').html(data);
+       },
+       error: function(data){
+         // error will show error object
+         console.log(data)
+         $('#result').html("error:"+JSON.stringify(data));
+      }
+     });
+  }*/
+  var createCORSRequest = function(method, url) {
+    var xhr = new XMLHttpRequest();
+    if ("withCredentials" in xhr) {
+      // Most browsers.
+      xhr.open(method, url, true);
+    } else if (typeof XDomainRequest != "undefined") {
+      // IE8 & IE9
+      xhr = new XDomainRequest();
+      xhr.open(method, url);
+    } else {
+      // CORS not supported.
+      xhr = null;
+    }
+    return xhr;
+  };
+
+  var url = 'https://f3hsbw8zig.execute-api.us-east-1.amazonaws.com/prod';
+  var method = 'POST';
+  var xhr = createCORSRequest(method, url);
+
+  xhr.onload = function() {
+    console.log("Success code goes here.")
+  };
+
+  xhr.onerror = function() {
+    console.log("Error code goes here.")
+  };
+
+  xhr.send();
+</script>
+  </body>
+</html>
