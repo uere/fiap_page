@@ -1,6 +1,6 @@
 # slackpage
 
-Exemplo de página para envio de mensagens ao Slack.
+Exemplo de página para envio de mensagens ao Slack e Teams.
 
 Bibliotecas utilizadas:
 
@@ -8,4 +8,4 @@ Bibliotecas utilizadas:
 
 > Ajax com jQuery
 
-Exemplo disponível em: https://tonanuvem.github.io/slackpage/
+Exemplo disponível em: https://tonanuvem.github.io/page/
