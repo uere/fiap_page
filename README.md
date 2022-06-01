@@ -9,3 +9,9 @@ Bibliotecas utilizadas:
 > Ajax com jQuery
 
 Exemplo disponível em: https://tonanuvem.github.io/page/
+
+# Docker
+
+Para acessar as imagens desse projeto acesse
+
+[Uere - Docker Hub](https://github.com/uere/fiap_page)
